@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-12 col-md-3 col-lg-3 mt-3 mx-5">
+                <form method="POST" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    <h5>Signup</h5>
+                    <label for="id_first_name">First Name</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control sentence" id="id_first_name" name="first_name" required type="text">
+                    </div>
+                    <label for="id_last_name">Last Name</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control sentence" id="id_last_name" name="last_name" required type="text">
+                    </div>
+                    <label for="id_email">Email</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control lowercase" id="id_email" name="email" required type="email">
+                    </div>
+                    <label for="id_username">Username</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control lowercase" type="text" name="username" autocomplete="username" minlength="1" maxlength="150" required="" id="id_username">
+                    </div>
+                    <label for="id_password1">New Password</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" id="id_password1" name="password1" required type="password">
+                    </div>
+                    <label for="id_password2">Confirm Password</label>
+                    <div class="input-group">
+                        <input class="form-control" id="id_password2" required name="password2" type="password">
+                    </div>
+                    <div class="justify-content-between mt-2">
+                        <button class="btn btn-info float-right" id="id_signup_btn" type="submit">Sign up</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3 mt-5">
+                <form method="POST">
+                    {% csrf_token %}
+                    <h5>Login</h5>
+                    <label for="id_username">Email or Username</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control lowercase" id="id_username" name="username" type="text">
+                    </div>
+                    <label for="id_password">Password</label>
+                    <div class="input-group">
+                        <input class="form-control" id="id_password" name="password" type="password">
+                    </div>
+                    <div class="justify-content-between mt-2">
+                        <button class="btn btn-info float-right" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).on("change", "#id_password2, #id_password1", function () { check_password(); });
+    function check_password() {
+        var passwd1 = $("#id_password1").val();
+        var passwd2 = $("#id_password2").val();
+        $("#id_signup_btn").attr('disabled', true);
+        if (passwd1 == passwd2) { $("#id_signup_btn").attr('disabled', false); }
+    }
+</script>
+{% endblock %}

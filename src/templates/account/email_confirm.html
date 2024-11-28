@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <h1>Verify Email Address</h1>
+        <p>
+            One Step ahead of user account verification. Click Confirm below..
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info">
+                Confirm
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+DEBUG=False
+SECRET_KEY="django-insecure-mdz1*qr%c71ap@ol^p6o3_v8xy&d0otnpp@*_=gdbozsd7x(*p"
+DATABASE_URL=postgres://postgres:redhat@localhost:5432/catalyst_count
+CACHE_URL=locmemcache://unique-snowflake
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER="jones.thayil@gmail.com"
+EMAIL_HOST_PASSWORD="sguextgnttuhztcv"

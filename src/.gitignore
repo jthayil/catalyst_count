@@ -1,0 +1,7 @@
+venv*/
+*.pyc
+*.log
+*.sqlite3
+.vscode/
+**/migrations/000*.py
+media/

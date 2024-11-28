@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block style %}
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+{% endblock %}
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>Upload Data</h1>
+                <form action="{% url 'accounts:home' %}" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="file" style="display: none;" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    Dropzone.options.myDropzone = {
+        maxFilesize: 2024,
+        maxFiles: 10,
+        init: function () {
+            this.on("error", function (file, message) { console.error(message); });
+        }
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block style %}
+<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/date-1.5.4/fh-4.0.1/sc-2.4.3/sb-1.8.1/sp-2.3.3/sr-1.4.1/datatables.min.css"
+    rel="stylesheet">
+<style>
+    .palm_cursor{
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pages" id="nav_masters">
+                <div class="row">
+                    <div class="col-12 masters" id="masters_col">
+                        <div class="card">
+                            <div class="card-header" id="id_masterheader">User Master</div>
+                            <div class="card-body">
+                                <form method="post" id="id_mt_form">
+                                    {% csrf_token %}
+                                    <div class="row" id="id_masterform">
+                                        <div class="col-sm-12 col-md-2 col-lg-2 mb-2">
+                                            <label for="master_first_name">First Name</label>
+                                            <input type="text" class="form-control" name="first_name"
+                                                placeholder="First Name" id="master_first_name">
+                                        </div>
+                                        <div class="col-sm-12 col-md-2 col-lg-2 mb-2">
+                                            <label for="master_last_name">Last Name</label>
+                                            <input type="text" class="form-control" name="last_name"
+                                                placeholder="Last Name" id="master_last_name">
+                                        </div>
+                                        <div class="col-sm-12 col-md-2 col-lg-2 mb-2">
+                                            <label for="master_email">Email</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Email"
+                                                id="master_email">
+                                        </div>                                        
+                                        <div class="col-sm-12 col-md-2 col-lg-2 mb-2">
+                                            <label for="master_username">Username</label>
+                                            <div class="input-group mb-3">
+                                                <input class="form-control lowercase" type="text" name="username" placeholder="Username" autocomplete="username" minlength="1" maxlength="150" required="" id="master_username">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-2 col-lg-2 mb-2" id="passwd">
+                                            <label for="master_password">Password</label>
+                                            <input type="text" class="form-control" name="password"
+                                                placeholder="password" id="master_password">
+                                        </div>
+                                        <div class="col-sm-12 col-md-1 col-lg-2 mt-3 pt-1">
+                                            <button type="button" class="btn btn-info add" id="master_add"
+                                                form-action="{% url 'accounts:master_user' 0 %}" data-master="user" >Add</button>
+                                            <button type="button" class="btn btn-info update" id="master_update" style="display: none;"
+                                                form-action="{% url 'accounts:master_user' 0 %}" data-master="user">Update</button>
+                                            <button type="button" class="btn btn-info reset"
+                                                id="master_reset">Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive mt_users">
+                                    <table class="table table-bordered table-striped table-hover" id="mt_users">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Username</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+{% now "Y" as current_year %}
+<script>
+    var masters_getusers_url = `{% url 'accounts:masters_getusers' %}`;
+    var masters_uptdusers_url = `{% url 'accounts:master_user' 0 %}`;
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    $('#master_type').html(`Users`);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script
+    src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/date-1.5.4/fh-4.0.1/sc-2.4.3/sb-1.8.1/sp-2.3.3/sr-1.4.1/datatables.min.js"></script>
+<!-- Masters Scripts -->
+<script src="{% static 'js/masters_users.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+{% endblock %}
